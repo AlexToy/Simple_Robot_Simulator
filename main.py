@@ -254,12 +254,12 @@ class SimpleRobotControl:
         distance = math.sqrt(
             (m.x_goal - m.x) * (m.x_goal - m.x) + (m.y_goal - m.y) * (m.y_goal - m.y)
         )
-        print(f"distance : {distance}")
+        #print(f"distance : {distance}")
 
         distance_goal = math.sqrt(
             m.x_goal * m.x_goal + m.y_goal * m.y_goal
         )
-        print(f"distance_goal : {distance_goal}")
+        #print(f"distance_goal : {distance_goal}")
 
         #New goal angle
         self.m.theta_goal = 2*math.atan2(m.y_goal,(m.x_goal+math.sqrt(m.x_goal*m.x_goal+m.y_goal*m.y_goal)))
@@ -269,7 +269,7 @@ class SimpleRobotControl:
         kp = 0.010
 
         # TODO
-        local_speed = distance 
+        local_speed = distance
         #print(f"local_speed : {local_speed}")
         local_turn = self.angle_diff(self.m.theta_goal ,self.m.theta)
 
@@ -281,7 +281,7 @@ class SimpleRobotControl:
         """Returns the smallest distance between 2 angles
         """
         # TODO
-        d = a-b
+        d = math.atan2(math.sin(a-b), math.cos(a-b))
         print(f"angle_diff : {d}")
         return d
 
