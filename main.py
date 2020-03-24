@@ -271,9 +271,10 @@ class SimpleRobotControl:
         #print(f"cmd : {cmd}")
 
         # TODO
-        local_speed = kp
+        local_speed = 0
         #print(f"local_speed : {local_speed}")
-        local_turn = self.angle_diff(self.m.theta_goal ,self.m.theta)
+        local_turn = 0
+        #local_turn = self.angle_diff(self.m.theta_goal ,self.m.theta)
 
         m1_speed, m2_speed = m.ik(local_speed, local_turn)
         m.m1.speed = m1_speed
@@ -283,7 +284,8 @@ class SimpleRobotControl:
         """Returns the smallest distance between 2 angles
         """
         # TODO
-        d = a-b
+        d = 0
+        #d = a-b
         print(f"angle_diff : {d}")
         return d
 
