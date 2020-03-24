@@ -23,7 +23,7 @@ class SimpleRobotControl:
         self.clock = pygame.time.Clock()
         self.t0 = pygame.time.get_ticks() / 1000.0
         self.is_artist = False
-        self.update_period = 1 / 60.0
+        self.update_period = 1 / 20.0
         # initialize and prepare screen
         pygame.init()
         self.screen = pygame.display.set_mode(WINSIZE)
@@ -255,9 +255,11 @@ class SimpleRobotControl:
             (m.x_goal - m.x) * (m.x_goal - m.x) + (m.y_goal - m.y) * (m.y_goal - m.y)
         )
 
+        self.m.theta_goal = 2*math.atan2(m.y_goal,(m.x_goal+math.sqrt(m.x_goal*m.x_goal+m.y_goal*m.y_goal)))
+
         # TODO
-        local_speed = 0
-        local_turn = 0
+        local_speed = distance
+        local_turn = self.angle_diff(self.m.theta_goal ,self.m.theta)
 
         m1_speed, m2_speed = m.ik(local_speed, local_turn)
         m.m1.speed = m1_speed
@@ -267,7 +269,8 @@ class SimpleRobotControl:
         """Returns the smallest distance between 2 angles
         """
         # TODO
-        d = 0
+        d = a-b
+        print(d)
         return d
 
 

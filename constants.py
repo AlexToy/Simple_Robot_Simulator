@@ -3,7 +3,7 @@ INVISIBLE = (111, 111, 0)
 WHITE = 255, 240, 200
 BLACK = 20, 20, 40
 gold = [212, 175, 55]
-WINSIZE = [1500, 840]
+WINSIZE = [1000, 500]
 WINCENTER = [WINSIZE[0] / 2, WINSIZE[1] / 2]
 OFFSET = [300, 100]
 CENTER_COLOR = [200, 0, 0]
@@ -32,3 +32,5 @@ R = 0.0325
 # Modes management
 XY_GOAL = "XY_GOAL"
 WHEEL_CONTROL = "WHEEL_CONTROL"
+
+fichier = open("data.txt", "a")

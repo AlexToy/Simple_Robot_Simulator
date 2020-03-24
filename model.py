@@ -86,11 +86,17 @@ class Model(object):
         linear_speed, rotation_speed = self.dk()
 
         # TODO
-        dx = linear_speed * dt
-        dtetha = rotation_speed * dt
+        d = round(linear_speed * dt,8)
+        dtetha = round(rotation_speed * dt,8)
+        dx = round(math.cos(dtetha) * d,8)
+        dy = round(math.sin(dtetha) * d,8)
 
         # Updating the robot position
-        self.x = self.x + dx  # TODO
-        self.y = self.y + 0  # TODO
-        self.theta = self.theta + dtetha  # TODO
+        self.x = round(self.x + dx,8)  # TODO
+        self.y = round(self.y + dy,8)  # TODO
+        self.theta = round(self.theta + dtetha,8)  # TODO
+        fichier.write("\ndteta =  ")
+        fichier.write(str(dtetha))
+        fichier.write("\nself.dteta  = ")
+        fichier.write(str(self.theta))
 
