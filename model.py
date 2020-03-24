@@ -97,8 +97,8 @@ class Model(object):
 
         # Updating the robot position
         self.x = round(self.x + dx,8)  # TODO
-        print(f"Pos x : {self.x}")
+        #print(f"Pos x : {self.x}")
         self.y = round(self.y + dy,8)  # TODO
-        print(f"Pos y : {self.y}")
+        #print(f"Pos y : {self.y}")
         self.theta = round(self.theta + dtheta,8)  # TODO
 
