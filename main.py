@@ -256,22 +256,21 @@ class SimpleRobotControl:
         )
         #print(f"distance : {distance}")
 
-        distance_goal = math.sqrt(
-            m.x_goal * m.x_goal + m.y_goal * m.y_goal
-        )
-        #print(f"distance_goal : {distance_goal}")
-
         #New goal angle
         self.m.theta_goal = 2*math.atan2(m.y_goal,(m.x_goal+math.sqrt(m.x_goal*m.x_goal+m.y_goal*m.y_goal)))
+        diff_angle = self.angle_diff(self.m.theta_goal ,self.m.theta)
 
-        error = abs(distance_goal - distance)
+        linear_speed, rotation_speed = m.dk()
+
+        cmd_speed = (rotation_speed / diff_angle) * distance
+        error = cmd_speed - linear_speed
         print(f"error : {error}")
-        kp = 0.010
+        kp = 10
 
         # TODO
-        local_speed = distance
+        local_speed = error 
         #print(f"local_speed : {local_speed}")
-        local_turn = self.angle_diff(self.m.theta_goal ,self.m.theta)
+        local_turn = diff_angle
 
         m1_speed, m2_speed = m.ik(local_speed, local_turn)
         m.m1.speed = m1_speed
@@ -282,7 +281,7 @@ class SimpleRobotControl:
         """
         # TODO
         d = math.atan2(math.sin(a-b), math.cos(a-b))
-        print(f"angle_diff : {d}")
+        #print(f"angle_diff : {d}")
         return d
 
 
