@@ -53,6 +53,7 @@ class Model(object):
         # TODO
         m1_speed = linear_speed + (self.l*rotational_speed)/2
         m2_speed = linear_speed - (self.l*rotational_speed)/2
+        
         return m1_speed, m2_speed
 
     def dk(self, m1_speed=None, m2_speed=None):
@@ -75,7 +76,6 @@ class Model(object):
         linear_speed = (m1_speed + m2_speed)/2            
         rotation_speed = (m1_speed - m2_speed)/self.l
         
-
         return linear_speed, rotation_speed
 
     def update(self, dt):
