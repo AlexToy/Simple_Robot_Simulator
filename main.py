@@ -262,15 +262,15 @@ class SimpleRobotControl:
 
         linear_speed, rotation_speed = m.dk()
 
-        cmd_speed = (rotation_speed / diff_angle) * distance
+        cmd_speed = rotation_speed * distance
         error = cmd_speed - linear_speed
         print(f"error : {error}")
-        kp = 10
+        kp = 0.9
 
         # TODO
-        local_speed = error 
+        local_speed = 0
         #print(f"local_speed : {local_speed}")
-        local_turn = diff_angle
+        local_turn = 0
 
         m1_speed, m2_speed = m.ik(local_speed, local_turn)
         m.m1.speed = m1_speed

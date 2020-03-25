@@ -86,19 +86,20 @@ class Model(object):
         linear_speed, rotation_speed = self.dk()
 
         # TODO
-        linear_distance = round(linear_speed * dt,8)
-        #print(f"linear_distance : {linear_distance}")
-        dtheta = round(rotation_speed * dt,8)
-        #print(f"dteta : {dtheta}")
-        dx = round(math.cos(dtheta + self.theta) * linear_distance,8)
-        #print(f"dx : {dx}")
-        dy = round(math.sin(dtheta + self.theta) * linear_distance,8)
-        #print(f"dy : {dy}")
+        linear_distance = linear_speed * dt
+        dtheta = rotation_speed * dt
+
+        x = math.cos(self.theta) * linear_distance
+        y = math.sin(self.theta) * linear_distance
+
+        dx = x * math.cos(dtheta) - y * math.sin(dtheta)
+        dy = x * math.sin(dtheta) + y * math.cos(dtheta)
+        #dx = round(math.cos(dtheta + self.theta) * linear_distance,8)
+        #dy = round(math.sin(dtheta + self.theta) * linear_distance,8)
+
 
         # Updating the robot position
-        self.x = round(self.x + dx,8)  # TODO
-        #print(f"Pos x : {self.x}")
-        self.y = round(self.y + dy,8)  # TODO
-        #print(f"Pos y : {self.y}")
-        self.theta = round(self.theta + dtheta,8)  # TODO
+        self.x = self.x + dx  # TODO
+        self.y = self.y + dy  # TODO
+        self.theta = self.theta + dtheta # TODO
 
