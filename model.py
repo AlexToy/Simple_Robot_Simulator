@@ -51,11 +51,11 @@ class Model(object):
             float -- Speed of motor1 (m/s), speech of motor2 (m/s)
         """
         # TODO
-        m1_speed = linear_speed + (L*rotational_speed) / 2
-        m2_speed = linear_speed - (L*rotational_speed) / 2
+        m1_speed = linear_speed + (self.l*rotational_speed)/2
+        m2_speed = linear_speed - (self.l*rotational_speed)/2
         return m1_speed, m2_speed
 
-    def dk(self):
+    def dk(self, m1_speed=None, m2_speed=None):
         """Given the speed of each of the 2 motors (m/s), 
         returns the linear speed (m/s) and rotational speed (rad/s) of a differential wheeled robot
         
@@ -67,9 +67,13 @@ class Model(object):
             float -- linear speed (m/s), rotational speed (rad/s)
         """
         # TODO
+        if m1_speed is None:
+            m1_speed = self.m1.speed
+        if m2_speed is None:
+            m2_speed = self.m2.speed
         
-        linear_speed = (self.m1.speed + self.m2.speed)/2            
-        rotation_speed = (self.m1.speed - self.m2.speed)/2
+        linear_speed = (m1_speed + m2_speed)/2            
+        rotation_speed = (m1_speed - m2_speed)/self.l
         
 
         return linear_speed, rotation_speed
@@ -94,9 +98,6 @@ class Model(object):
 
         dx = x * math.cos(dtheta) - y * math.sin(dtheta)
         dy = x * math.sin(dtheta) + y * math.cos(dtheta)
-        #dx = round(math.cos(dtheta + self.theta) * linear_distance,8)
-        #dy = round(math.sin(dtheta + self.theta) * linear_distance,8)
-
 
         # Updating the robot position
         self.x = self.x + dx  # TODO
